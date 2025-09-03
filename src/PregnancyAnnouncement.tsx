@@ -76,7 +76,7 @@ export default function PregnancyAnnouncement() {
               top: `${heart.y}%`,
             }}
           >
-            <Heart className="bg-rose-400/15" size={24} />
+            <Heart className="text-rose-400/15" size={24} />
           </motion.div>
         ))}
       </AnimatePresence>
