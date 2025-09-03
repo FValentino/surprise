@@ -10,6 +10,7 @@ export default function PregnancyAnnouncement() {
   const [timeLeft, setTimeLeft] = useState(10)
   const [showFinalMessage, setShowFinalMessage] = useState(false)
   const [showBabyPhoto, setShowBabyPhoto] = useState(false)
+  const [imageLoaded, setImageLoaded] = useState(false)
   const [hearts, setHearts] = useState<Array<{ id: number; x: number; y: number }>>([])
 
   useEffect(() => {
@@ -42,7 +43,7 @@ export default function PregnancyAnnouncement() {
   }, [timeLeft])
 
   return (
-    <div className="w-full min-h-screen bg-gradient-to-br from-gray-800 via-slate-700 to-zinc-800 flex items-center justify-center  relative overflow-hidden">
+    <div className="w-full min-h-screen bg-gradient-to-br from-gray-800 via-slate-700 to-zinc-800 flex items-center justify-center relative overflow-hidden">
       <AnimatePresence>
         {hearts.map((heart) => (
           <motion.div
@@ -62,57 +63,58 @@ export default function PregnancyAnnouncement() {
         ))}
       </AnimatePresence>
 
-      <div className="container text-center mx-auto">
+      <div className="container h-[90vh]  flex flex-col justify-start text-center">
         {!showFinalMessage ? (
-          <>
-            <motion.div
-              className="mb-8"
+          <AnimatePresence>
+            <div className=" flex flex-col justify-center items-center space-y-9">
+              <motion.div
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.5 }}
-            >
-              <motion.div
-                key={timeLeft}
-                initial={{ scale: 1.2 }}
-                animate={{ scale: 1 }}
-                transition={{ duration: 0.3, ease: "easeOut" }}
-                className="text-8xl md:text-9xl font-bold text-emerald-400 mb-4"
+              className="mt-24"
               >
-                {timeLeft}
-              </motion.div>
-              <div className="text-xl md:text-2xl text-blue-200">segundos</div>
-            </motion.div>
-
-            <div className="relative w-[90%] mx-auto h-32 md:h-40 overflow-hidden">
-              <AnimatePresence mode="wait">
                 <motion.div
-                  initial={{ x: "100%", opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  exit={{ x: "-100%", opacity: 0 }}
-                  transition={{
-                    duration: 0.8,
-                    ease: [0.25, 0.46, 0.45, 0.94], 
-                  }}
-                  className="absolute inset-0 w-full"
+                  key={timeLeft}
+                  initial={{ scale: 1.2 }}
+                  animate={{ scale: 1 }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
+                  className="text-8xl md:text-9xl font-bold text-emerald-400"
                 >
-                  <div className="bg-gray-800/90 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-lg border border-emerald-400/50 h-full flex flex-col items-center justify-center">
-                    <p className="text-lg md:text-2xl text-gray-200 font-medium leading-relaxed text-balance">
-                      Tu apoyo significa todo para mí. 
-                    </p>
-                    <p className="w-full text-lg md:text-xl text-gray-200 font-medium leading-relaxed text-balance text-center">
-                      Compartimos tantos momentos especiales que se volvieron parte de quienes somos. 
-                    </p>
-                    <p className="w-full text-lg md:text-xl text-gray-200 font-medium leading-relaxed text-balance text-center">
-                      Sos una parte fundamental de mi vida, alguien con quien crecí y de quien aprendí tanto. 
-                    </p>
-                    <p className="w-full text-lg md:text-xl text-gray-200 font-medium leading-relaxed text-balance text-center">
-                      Por eso, hoy quiero contarte una nueva etapa que nos llena de alegría
-                    </p>
-                  </div>
+                  {timeLeft}
                 </motion.div>
-              </AnimatePresence>
+                <div className="text-xl md:text-2xl text-blue-200">segundos</div>
+              </motion.div>
+
+              <div className=" w-[90%] mx-auto h-auto md:h-40 ">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    initial={{ x: "100%", opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    exit={{ x: "-100%", opacity: 0 }}
+                    transition={{
+                      duration: 0.8,
+                      ease: [0.25, 0.46, 0.45, 0.94], 
+                    }}
+                  >
+                    <div className=" h-auto bg-gray-800/90 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-lg border border-emerald-400/50 flex flex-col items-center justify-center space-y-2">
+                      <p className="text-lg md:text-2xl text-gray-200 font-medium leading-relaxed text-balance">
+                        Tu apoyo significa todo para mí. 
+                      </p>
+                      <p className="text-md md:text-xl text-gray-200 font-medium leading-relaxed text-balance text-center">
+                        Compartimos tantos momentos especiales que se volvieron parte de quienes somos. 
+                      </p>
+                      <p className=" text-md md:text-xl text-gray-200 font-medium leading-relaxed text-balance text-center">
+                        Sos una parte fundamental de mi vida, alguien con quien crecí y de quien aprendí tanto. 
+                      </p>
+                      <p className="text-md md:text-xl text-gray-200 font-medium leading-relaxed text-balance text-center">
+                        Por eso, hoy quiero contarte una nueva etapa que nos llena de alegría
+                      </p>
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
             </div>
-          </>
+          </AnimatePresence>
         ) : (
           <AnimatePresence>
             <motion.div
@@ -146,37 +148,54 @@ export default function PregnancyAnnouncement() {
                   animate={{ opacity: 1, scale: 1, y: 20 }}
                   transition={{ duration: 1.5, ease: "easeOut" }}
                 >
-                  <div className="bg-gray-800/80 rounded-3xl p-6 shadow-2xl border-4 border-emerald-400/60 max-w-md mx-auto">
-                    <motion.img
-                      src={eco}
-                      className="w-full h-auto rounded-2xl shadow-lg"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1}}
-                      transition={{ duration: 4}}
-                    />
-                    <motion.div
-                      className="mt-4 flex justify-center space-x-2"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ duration: 4 }}
-                    >
-                      {[...Array(5)].map((_, i) => (
-                        <motion.div
-                          key={i}
-                          initial={{ scale: 0 }}
-                          animate={{ scale: 1 }}
-                          transition={{
-                            duration: 0.5,
-                            delay: 0.8 + i * 0.1,
-                            repeat: Number.POSITIVE_INFINITY,
-                            repeatType: "reverse",
-                            repeatDelay: 1,
-                          }}
-                        >
-                          <Heart className="text-rose-400" size={20} />
-                        </motion.div>
-                      ))}
-                    </motion.div>
+                  <div className="bg-gray-800/80 h-[100x] rounded-3xl p-6 shadow-2xl border-4 border-emerald-400/60 max-w-md mx-auto">
+                    <div className="relative">
+                      {!imageLoaded && (
+                        <div className="w-full h-64 bg-gray-300/20 rounded-2xl flex items-center justify-center">
+                          <motion.div
+                            animate={{ rotate: 360 }}
+                            transition={{ duration: 1, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+                            className="w-8 h-8 border-2 border-gray-400 border-t-transparent rounded-full"
+                          />
+                        </div>
+                      )}
+                      <motion.img
+                        src={eco}
+                        className={`w-full h-auto rounded-2xl shadow-lg transition-opacity duration-500 ${
+                          imageLoaded ? "opacity-100" : "opacity-0 absolute inset-0"
+                        }`}
+                        onLoad={() => setImageLoaded(true)}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: imageLoaded ? 1 : 0 }}
+                        transition={{ duration: 0.8, ease: "easeOut" }}
+                      />
+                    </div>
+
+                    {imageLoaded && (
+                      <motion.div
+                        className="mt-4 flex justify-center space-x-2"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 1, delay: 0.3 }}
+                      >
+                        {[...Array(5)].map((_, i) => (
+                          <motion.div
+                            key={i}
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            transition={{
+                              duration: 0.5,
+                              delay: 0.5 + i * 0.1,
+                              repeat: Number.POSITIVE_INFINITY,
+                              repeatType: "reverse",
+                              repeatDelay: 1,
+                            }}
+                          >
+                            <Heart className="text-rose-400" size={20} />
+                          </motion.div>
+                        ))}
+                      </motion.div>
+                    )}
                   </div>
                 </motion.div>
               </AnimatePresence>
