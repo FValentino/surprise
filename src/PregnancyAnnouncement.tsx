@@ -5,24 +5,9 @@ import { Heart } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import eco from "/ecografia.jpg"
 
-const emotiveMessages = [
-  "Sos muy importante para mí...",
-  "Siempre has estado ahí cuando te necesité...",
-  "Tu apoyo significa todo para mí...",
-  "Compartimos tantos momentos especiales...",
-  "Eres una persona increíble...",
-  "Tu amor y cariño son únicos...",
-  "Siempre puedo contar contigo...",
-  "Eres parte fundamental de mi vida...",
-  "Juntos hemos crecido y aprendido tanto...",
-  "Tu felicidad es mi felicidad...",
-  "Eres una inspiración para mí...",
-  "Tu presencia hace todo mejor...",
-]
 
 export default function PregnancyAnnouncement() {
-  const [timeLeft, setTimeLeft] = useState(20)
-  const [currentMessage, setCurrentMessage] = useState(0)
+  const [timeLeft, setTimeLeft] = useState(10)
   const [showFinalMessage, setShowFinalMessage] = useState(false)
   const [showBabyPhoto, setShowBabyPhoto] = useState(false)
   const [hearts, setHearts] = useState<Array<{ id: number; x: number; y: number }>>([])
@@ -31,10 +16,6 @@ export default function PregnancyAnnouncement() {
     if (timeLeft > 0) {
       const timer = setTimeout(() => {
         setTimeLeft(timeLeft - 1)
-
-        if (timeLeft % 3 === 0 && currentMessage < emotiveMessages.length - 1) {
-          setCurrentMessage(currentMessage + 1)
-        }
 
         // Agregar corazones en momentos especiales
         if (timeLeft <= 10 && timeLeft % 2 === 0) {
@@ -58,7 +39,7 @@ export default function PregnancyAnnouncement() {
       setTimeout(() => setShowFinalMessage(true), 500)
       setTimeout(() => setShowBabyPhoto(true), 2500)
     }
-  }, [timeLeft, currentMessage])
+  }, [timeLeft])
 
   return (
     <div className="w-full min-h-screen bg-gradient-to-br from-gray-800 via-slate-700 to-zinc-800 flex items-center justify-center  relative overflow-hidden">
@@ -105,7 +86,6 @@ export default function PregnancyAnnouncement() {
             <div className="relative w-[90%] mx-auto h-32 md:h-40 overflow-hidden">
               <AnimatePresence mode="wait">
                 <motion.div
-                  key={currentMessage}
                   initial={{ x: "100%", opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   exit={{ x: "-100%", opacity: 0 }}
@@ -113,11 +93,20 @@ export default function PregnancyAnnouncement() {
                     duration: 0.8,
                     ease: [0.25, 0.46, 0.45, 0.94], 
                   }}
-                  className="absolute inset-0"
+                  className="absolute inset-0 w-full"
                 >
-                  <div className="bg-gray-800/90 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-lg border border-emerald-400/50 h-full flex items-center justify-center">
+                  <div className="bg-gray-800/90 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-lg border border-emerald-400/50 h-full flex flex-col items-center justify-center">
                     <p className="text-lg md:text-2xl text-gray-200 font-medium leading-relaxed text-balance">
-                      {emotiveMessages[currentMessage]}
+                      Tu apoyo significa todo para mí. 
+                    </p>
+                    <p className="w-full text-lg md:text-xl text-gray-200 font-medium leading-relaxed text-balance text-center">
+                      Compartimos tantos momentos especiales que se volvieron parte de quienes somos. 
+                    </p>
+                    <p className="w-full text-lg md:text-xl text-gray-200 font-medium leading-relaxed text-balance text-center">
+                      Sos una parte fundamental de mi vida, alguien con quien crecí y de quien aprendí tanto. 
+                    </p>
+                    <p className="w-full text-lg md:text-xl text-gray-200 font-medium leading-relaxed text-balance text-center">
+                      Por eso, hoy quiero contarte una nueva etapa que nos llena de alegría
                     </p>
                   </div>
                 </motion.div>
@@ -146,7 +135,7 @@ export default function PregnancyAnnouncement() {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 2 }}
               >
-                ¡Estoy muy contento de poder darte la noticia de que van a ser TÍOS!
+                ¡Estamos muy contentos de poder darles la noticia de que van a ser TÍOS!
               </motion.h2>
             </motion.div>
 
