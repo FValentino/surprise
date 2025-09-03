@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { Heart } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
+import eco from "/ecografia.jpg"
 
 const emotiveMessages = [
   "Sos muy importante para mí...",
@@ -158,7 +159,7 @@ export default function PregnancyAnnouncement() {
                 >
                   <div className="bg-gray-800/80 rounded-3xl p-6 shadow-2xl border-4 border-emerald-400/60 max-w-md mx-auto">
                     <motion.img
-                      src="../src/assets/ecografia.jpg"
+                      src={eco}
                       alt="Foto del bebé"
                       className="w-full h-auto rounded-2xl shadow-lg"
                       initial={{ opacity: 0 }}
